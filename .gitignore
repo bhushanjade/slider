@@ -12,7 +12,7 @@ node_modules/
 # Environmental config
 .env
 .env.*
-build/
+
 #config js
 src/APIConfig.js
 
