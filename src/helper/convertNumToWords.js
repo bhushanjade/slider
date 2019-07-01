@@ -1,5 +1,11 @@
 import getLength from './getLength';
 //TODO : Add 3digits and more numbers.
+/**
+ *  Convert given number into Words
+ *  NOTE : it only handles 2 digit numbers only. @see TODO
+ * @param num
+ * @returns {*}
+ */
 export default function convertNumToWords(num) {
     let words = {};
     //var words = new Array();

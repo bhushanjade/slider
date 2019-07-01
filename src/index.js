@@ -24,6 +24,7 @@ const NoMatch = ({}) => (
     </div>
 );
 //Ref : https://github.com/facebook/create-react-app/issues/1765
+//TODO : Add Browser Router for gh-pages
 ReactDOM.render(<Router basename={process.env.PUBLIC_URL}>
     <div>
         <Suspense fallback={<div>Loading...</div>}>

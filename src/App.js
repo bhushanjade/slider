@@ -11,7 +11,9 @@ const Carousel = React.lazy(() => import('./components/carousel/Carousel'));
 const Popup = React.lazy(() => import('./components/Popup'));
 
 
-
+/**
+ * App holds the all components
+ * */
 class App extends Component {
     hidePopup = () => {
         this.setState({
@@ -33,6 +35,12 @@ class App extends Component {
     }
     onChangeEventHandler = (val) => {
         let slides = {};
+        /*
+        * Create Slide key value pair here and pass it to Carousel
+        * key => Number
+        * value => Number in words
+        * eg {1:one}
+        * */
         for (let i = 1; i <= val; i++) {
             slides[i] = convertNumToWords(i);
         }

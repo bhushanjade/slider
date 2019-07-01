@@ -1,5 +1,69 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-# https://facebook.github.io/create-react-app/docs/deployment#customizing-environment-variables-for-arbitrary-build-environments
+
+### [Slider Demo](https://bhushanjade.github.io/slider/)
+### URL: https://bhushanjade.github.io/slider/
+### Packages USED :
+- [Reactstrap](https://reactstrap.github.io/)
+- [Bootstrap](https://getbootstrap.com/)
+- [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+
+### References/Guides :
+1. https://facebook.github.io/create-react-app/docs/deployment#customizing-environment-variables-for-arbitrary-build-environments
+
+### Configuration 
+###### Note: For prod deployment for UsernName/Password it should have [`.env.production`].(https://facebook.github.io/create-react-app/docs/deployment#customizing-environment-variables-for-arbitrary-build-environments)
+- Create `.env` file & add 
+    ```
+   REACT_APP_USER_NAME=<username>
+   REACT_APP_PASSWORD=<password>
+   REACT_APP_AUTH_LOCALSTORAGE_KEY=token
+   REACT_APP_PUBLIC_URL=https://bhushanjade.github.io/slider/
+    ```
+- Run `npm run test` to run unit test cases. ( It uses CRA so all options will work.)
+
+# Features In Current Version:
+1. Login with username & password
+2. Select Number from dropdown to display sides.
+3. on Click of Finish, A Model box showing all numbers that user selected while using app
+
+
+### Folder Structure & Details
+`Windows cmd` : `tree /f`
+```
+│   .env                        => Local Environment File
+│   .env.production             => Production Environment File
+───src
+    │   App.css
+    │   App.js
+    │   App.test.js
+    │   index.css
+    │   index.js                => App & Router Setup
+    │   logo.svg
+    │   serviceWorker.js
+    │   slider.css              => Slider Css
+    │   
+    ├───components
+    │   │   Header.jsx          => Header with Dropdowm component
+    │   │   Login.jsx           => Login Component
+    │   │   NumberDropDown.js   => Number Dropdown
+    │   │   Popup.jsx
+    │   │   
+    │   └───carousel            => Carousel Components
+    │           Arrow.jsx
+    │           Carousel.jsx
+    │           DotsMemo.jsx
+    │           Slide.jsx
+    │           
+    ├───helper
+    │       convertNumToWords.js => Helper function to convert number to words
+    │       getLength.js         => Helper function to find length of number
+    │       
+    └───hoc 
+            DefaultLayout.js    => To handle Layout
+            PrivateRoute.js     => To handle login
+```
+
+
 ## Available Scripts
 
 In the project directory, you can run:
