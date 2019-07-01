@@ -21,7 +21,7 @@ class App extends Component {
 
     logoutHandler = () => {
         localStorage.removeItem(process.env.REACT_APP_AUTH_LOCALSTORAGE_KEY);
-        window.location = '/';
+        window.location = process.env.PUBLIC_URL;
     }
 
     resetCount = () => {
