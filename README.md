@@ -11,21 +11,23 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1. https://facebook.github.io/create-react-app/docs/deployment#customizing-environment-variables-for-arbitrary-build-environments
 
 ### Configuration 
-###### Note: For prod deployment for UsernName/Password it should have [`.env.production`].(https://facebook.github.io/create-react-app/docs/deployment#customizing-environment-variables-for-arbitrary-build-environments)
-- Create `.env` file & add 
+###### Note: For prod deployment, UsernName/Password should be in  [`.env.production`].(https://facebook.github.io/create-react-app/docs/deployment#customizing-environment-variables-for-arbitrary-build-environments)
+- Create `.env` (for local) file & add 
     ```
    REACT_APP_USER_NAME=<username>
    REACT_APP_PASSWORD=<password>
    REACT_APP_AUTH_LOCALSTORAGE_KEY=token
    REACT_APP_PUBLIC_URL=https://bhushanjade.github.io/slider/
     ```
-- Run `npm run test` to run unit test cases. ( It uses CRA so all options will work.)
 
 # Features In Current Version:
 1. Login with username & password
 2. Select Number from dropdown to display sides.
 3. on Click of Finish, A Model box showing all numbers that user selected while using app
 
+# Future/TODO Implementation:
+- Add Transition effects.
+- Implement Autoplay.
 
 ### Folder Structure & Details
 `Windows cmd` : `tree /f`
