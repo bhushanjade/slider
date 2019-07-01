@@ -1,26 +1,117 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component, Suspense} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import {Redirect} from 'react-router-dom';
+import {Header} from './components/Header';
+import convertNumToWords from './helper/convertNumToWords';
+import {Button} from 'reactstrap';
+
+//lazy load carousel & popup
+const Carousel = React.lazy(() => import('./components/carousel/Carousel'));
+const Popup = React.lazy(() => import('./components/Popup'));
+
+
+
+class App extends Component {
+    hidePopup = () => {
+        this.setState({
+            showPopup: false
+        });
+    }
+
+    logoutHandler = () => {
+        localStorage.removeItem(process.env.REACT_APP_AUTH_LOCALSTORAGE_KEY);
+        window.location = '/';
+    }
+
+    resetCount = () => {
+        this.setState({
+            totalSlides: 0,
+            slides: {},
+            selectedNums: []
+        });
+    }
+    onChangeEventHandler = (val) => {
+        let slides = {};
+        for (let i = 1; i <= val; i++) {
+            slides[i] = convertNumToWords(i);
+        }
+        this.setState({
+            totalSlides: val,
+            slides: slides,
+
+        });
+
+        this.setState(prevState => ({
+            selectedNums: [...prevState.selectedNums, val]
+        }))
+
+    }
+    ShowPopup = () => {
+        if (this.state.selectedNums.length > 0) {
+            this.setState({
+                showPopup: true
+            });
+        } else {
+            alert('Select Slides First');
+        }
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            showPopup: false,
+            totalSlides: 0,
+            slides: {},
+            selectedNums: []
+        }
+    }
+
+    componentWillUnmount() {
+
+
+    }
+
+    render() {
+        // if (this.state.showPopup) {
+        //     return(
+        //         <Redirect to={{
+        //             pathname: '/finish',
+        //             state: {selectedNums: this.state.selectedNums}
+        //         }}
+        //         />
+        //     )
+        // }
+
+        return (
+            <>
+
+
+                <Header logoutHandler={this.logoutHandler} onChangeEventHandler={this.onChangeEventHandler} totalSlides={this.state.totalSlides}/>
+
+
+                {this.state.totalSlides > 0 ?
+                    <Suspense fallback={<div>Loading...</div>}> <Carousel totalSlides={this.state.totalSlides}
+                                                                          slides={this.state.slides}/></Suspense> :
+                    <h1>Select Num Of Slide</h1>}
+
+                <br/>
+                {this.state.selectedNums.length > 0 ? <Button onClick={this.ShowPopup}>Finish</Button> : null}
+
+                {this.state.showPopup ?
+                    <Suspense fallback={<div>Loading...</div>}> <Popup resetCount={this.resetCount}
+                                                                       hidePopup={this.hidePopup}
+                                                                       selectedNums={this.state.selectedNums}/></Suspense> : null}
+
+            </>
+        )
+            ;
+    }
 }
+
+
+// function App() {
+//
+// }
 
 export default App;

@@ -1,10 +1,47 @@
-import React from 'react';
+import React, {Component, Suspense} from 'react';
+
+import PrivateRoute from './hoc/PrivateRoute';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import * as serviceWorker from './serviceWorker';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import DefaultLayout from './hoc/DefaultLayout';
+
+const App = React.lazy(() => import('./App'));
+const Login = React.lazy(() => import('./components/Login'));
+const Finish = React.lazy(() => import('./components/Popup'));
+
+
+const NoMatch = ({}) => (
+    <div>
+        <h3>
+            No match for <code>{window.location.pathname}</code>
+        </h3>
+    </div>
+);
+
+ReactDOM.render(<Router>
+    <div>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+
+                <PrivateRoute exact path="/" component={App}
+                              layout={DefaultLayout}/>
+
+                <Route path="/login" component={Login}/>
+
+
+                <Route component={NoMatch}/>
+
+            </Switch>
+        </Suspense>
+    </div>
+
+</Router>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
