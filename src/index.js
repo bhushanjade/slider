@@ -23,8 +23,8 @@ const NoMatch = ({}) => (
         </h3>
     </div>
 );
-
-ReactDOM.render(<Router>
+//Ref : https://github.com/facebook/create-react-app/issues/1765
+ReactDOM.render(<Router basename={process.env.PUBLIC_URL}>
     <div>
         <Suspense fallback={<div>Loading...</div>}>
             <Switch>
